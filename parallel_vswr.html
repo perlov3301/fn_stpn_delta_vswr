@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>f1 s1_VSWR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles.css" rel="stylesheet" />
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" 
+      rel="stylesheet" type="text/css">
+
+ <!-- CSS–– -->
+ <link rel="stylesheet" type="text/css" href="css/normalize.css" >
+ <link rel="stylesheet" type="text/css" href="css/skeleton.css" >
+
+ <!-- Favicon -->
+ <link rel="icon" type="image/png" href="images/favicon.png">
+    <style>
+      body {
+        width: 96%;
+        margin: 2% auto;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid #ddd;
+        font-size: 1.25rem;
+        letter-spacing: 1px;
+      }
+      caption{
+        caption-side: top ;
+        padding:10px;
+        font-weight:bold;
+      }
+      thead, tfoot {
+        background-color: rgb(228, 240,245);
+      }
+      th {
+        border: 1px solid #ddd;
+        padding:8px 10px;
+        height: 2.5rem;
+        text-align: center;
+      }
+      td {
+        border: 1px solid #ddd;
+        padding: 8px 0;
+        height: 2.5rem;
+        text-align: center;
+      }
+      td:last-of-type {
+        text-align: center;
+      }
+      tbody tr:nth-child(even) {
+        background-color: rgb(248, 248, 248);
+      }
+      td input {
+        min-width: 96%;
+        box-sizing: border-box;
+        border: none;
+        border:0;
+        padding: 4px;
+        /* height: 100% */
+      }
+
+td  input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+td  input[type=number] {
+  -moz-appearance: textfield;
+  /* appearance:; */
+}
+.minWidthCell {
+    min-width: 3rem;
+}
+
+      
+    </style>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+</head>
+<body>
+    <div class="container">
+        <h5> Feedback welcome:perlov1001@gmail.com</h5>
+        <form id="vswrForm" >
+          <div class="row">
+            <div class="six columns inline_inputs" >
+              <label for="generator" style="font-weight: bold;">generator Impedance (Ω):</label>
+              <input type="number" 
+                id="generatorR" 
+                step="any" required>
+            </div>
+            <div class="six columns inline_inputs">
+              <label for="frequency_n" style="font-weight: bold;">number of frequencies</label>
+              <input type="number" 
+                min="1" 
+                id="frequency_n" 
+                step="1" required >
+            </div>
+          </div>
+            <br>
+          <button 
+            id="button_f_n_table"
+            class="button-primary">load the Table
+          </button>
+            <table id="mytable">
+              <caption>frequency and load impedance</caption>
+              <thead>
+                <tr >
+                  <th scope="col">frequency(MHz)</th>
+                  <th scope="col">Load real R(Ω)</th>
+                  <th scope="col">Load imag X(Ω)</th>
+                </tr>
+              </thead>
+              <tbody id="frequencyTableBody">
+              </tbody>
+            </table>
+            <br>
+            <br>
+            <!-- <p>stage number 1</p> -->
+            <label >line1 is ended by short circuit; to eliminate it enter impedance 10000 or more;</label>
+            <label>line2 is ended by complex Impedance</label>   
+            <br>
+            <div class="app_diagram_wrapper">
+              <canvas id="structure1" width="800" height="260"></canvas>
+            </div>
+            <div class="row">
+              <div class="six columns inline_inputs">
+                <label for="stp_n_input" style="font-weight:bold;">
+                    number of steps</label>
+                <input type="number" 
+                    min="1" 
+                    id="stp_n_input"
+                    step="1" required >
+              </div>
+              <div class="six columns inline_inputs">
+                <button id="table_stp" 
+                   class="button-primary">load table of steps</button>
+              </div>
+            </div>
+            <table id="stpTable">
+              <caption>UHF Line parameters</caption>
+              <thead>
+                <tr >
+                  <th scope="col" rowspan="2" class="vertical">steps</th>
+                  <th scope="col" rowspan="2" class="vertical">strips</th>
+                  <th scope="col" colspan="2">impedance (Ω)</th>
+                  <th scope="col" colspan="2">length (mm)</th>
+                </tr>
+                <tr>
+                  <th scope="col">min</th>
+                  <th scope="col">max</th>
+                  <th scope="col">min</th>
+                  <th scope="col">max</th>
+                </tr>
+              </thead>
+              <tbody id="stpTableBody">
+              </tbody>
+            </table>
+            <br>
+            <div class="row">
+              <div class="six columns inline_inputs">
+                <button class="button-primary" 
+                  style="margin-top: .1rem;"
+                  type="submit">calculate
+                </button>
+              </div>
+              <div class="six columns inline_inputs">
+                <!-- <button onclick="window.location.reload();" or -->
+                  <!-- type="reset">reset -->
+                <button onclick="console.clear(); "
+                  style="margin-top: .1rem;"
+                  type="button">clear console
+                </button>
+              </div>
+            </div>
+            
+        </form>
+        <br>
+        <fieldset>
+          <legend>results</legend>
+          <div id="result_vswr"></div>
+          <div id="statusIndicator" 
+             class="status-indicator">Ready to Input</div>
+        </fieldset>
+        
+        <br>
+        <div id="result_zin" class="inline_inputs">
+          <label for="explanation" style="font-weight: bold;">Zin or error</label>
+          <textarea id="explanation" 
+             rows="7"
+             cols="71"
+             minheight="10rem"
+             readonly></textarea>
+        </div>
+    </div>
+    <script type="module" src="parallel_vswr.js"></script>
+    <script type="module" src="timenow.js"></script>
+    <script type="module" src="calculateVSWR.js"></script>
+    <script type="module" src="parallel_zin.js"></script>
+    <script type="module" src="mycanvas.js"></script>
+
+</body>
+</html>
+ 
+            

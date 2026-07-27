@@ -1,0 +1,10 @@
+This tool synthesizes multi-section RF impedance transformers for UHF frequency ranges, built from cascaded transmission-line sections. Each step pairs two strip elements — one connecting to the load, one short-circuited to ground — and their combined input impedance feeds into the next step, forming a chain that can be tuned to match complex loads across a wide bandwidth.
+
+The design engine works in two phases: a randomized search explores the space of possible strip lengths and characteristic impedances to find promising starting configurations, followed by a genetic optimization stage that refines those candidates against your target specification. You can specify separate frequency sets for passband behavior (low VSWR, good match) and stopband behavior (high VSWR, strong rejection), enabling the synthesis of combined matching-and-filtering networks — not just simple transformers.
+
+The approach descends from transformer synthesis methods for UHF antennae developed by me in the late 1980s/early 1990s, originally implemented in Pascal, now rebuilt from the ground up in JavaScript for accessibility and modern use directly in the browser.
+A free browser-based tool for synthesizing multi-step RF impedance transformers, aimed at UHF antenna matching and combined bandpass/bandstop filter design.
+
+Each step is built from two transmission-line strips — one in series toward the load, one shorted stub to ground — cascaded so each step's input impedance becomes the load for the next. The synthesis engine runs in two phases: a randomized search over strip lengths/impedances, followed by a genetic algorithm that refines candidates against target VSWR/return-loss specs. You give it two frequency sets — one for passband (low VSWR) and one for stopband (high rejection) — and it optimizes both simultaneously.
+
+This is a from-scratch JS rewrite of an approach I originally implemented  by me in Pascal in the late 80s/early 90s as an antenna engineer, back when this kind of synthesis meant overnight batch runs.
