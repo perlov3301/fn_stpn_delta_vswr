@@ -1,15 +1,25 @@
 
 document.addEventListener("readystatechange",()=> {
     console.log("document.readyState:", document.readyState);
-
+// just line
     function fline(vctx,xb, yb, xe, ye){
         vctx.beginPath();
         vctx.moveTo(xb,yb);
         vctx.lineTo(xe, ye);
         vctx.strokeStyle='black';
-        vctx.lineWidth= 3;
+        vctx.lineWidth= 2;
         vctx.stroke();
     }
+// strip line
+    function fline_bold(vctx,xb, yb, xe, ye){
+        vctx.beginPath();
+        vctx.moveTo(xb,yb);
+        vctx.lineTo(xe, ye);
+        vctx.strokeStyle='black';
+        vctx.lineWidth= 6;
+        vctx.stroke();
+    }
+// impendace sign
     function z_vert(vctx,x_0, y_0) {
         vctx.beginPath();
         vctx.moveTo(x_0, y_0); // from top
@@ -25,8 +35,8 @@ document.addEventListener("readystatechange",()=> {
     }
     function base(x_0, y_0) {
         ctx1.beginPath();
-        ctx1.moveTo(x_0+12, y_0);
-        ctx1.lineTo(x_0-12, y_0);
+        ctx1.moveTo(x_0+14, y_0);
+        ctx1.lineTo(x_0-14, y_0);
         ctx1.strokeStyle='black';
         ctx1.lineWidth= 5;
         ctx1.stroke();
@@ -48,6 +58,29 @@ document.addEventListener("readystatechange",()=> {
     function renderDraw1() {// clear and draw
         ctx1.clearRect(0,0, canvas1.widht, canvas1.height);
         ctx1.translate(0,-360);
+    // text
+        ctx1.font="19px arial";
+        ctx1.fillStyle="navy";
+        ctx1.fillText("section n", 170, 390);
+        ctx1.fillText("section 1", 480, 390);
+    // section 1
+        ctx1.font="15px arial bold";
+        ctx1.fillText("Line2", 531, 440);
+        rotatedText(ctx1, "Line1", 
+            469, // x local origin
+            510, //y local origin
+            -90,  // degrees
+            "15px" // font
+       );
+    // section n
+        ctx1.font="15px arial bold";
+        ctx1.fillText("Line2", 231, 440);
+        rotatedText(ctx1, "Line1", 
+            158, // x local origin
+            510, //y local origin
+            -90,  // degrees
+            "15px" // font
+       );
     //  outlined line
         fline(ctx1, 60, 420, 350, 420);
         fline(ctx1, 360, 420, 370, 420);
@@ -67,23 +100,28 @@ document.addEventListener("readystatechange",()=> {
         z_vert(ctx1, 710, 516);
         fline(ctx1, 710, 545, 710, 575);
         base(710, 575);
+        fline_bold(ctx1, 190, 420, 300, 420);
+        fline_bold(ctx1, 510, 420, 620, 420);
+        fline_bold(ctx1, 450, 440, 450, 550);
+        fline_bold(ctx1, 135, 440, 135, 550);
+
         rotatedText(ctx1, "generator R", 
-            40, // x local origin
+            35, // x local origin
             510, //y local origin
             -90,  // degrees
-            "12px" // font
+            "15px" // font
        );
         rotatedText(ctx1, "R_load", // text
             740, // x local origin
             464, //y local origin
             -90,  // degrees
-            "12px" // font
+            "15px" // font
         );
-        rotatedText(ctx1, "j*X_load", // text
+        rotatedText(ctx1, "X_load", // text
             740, // x local origin
             533, //y local origin
             -90,  // degrees
-            "12px" // font
+            "15px" // font
         );
     }
     renderDraw1();
