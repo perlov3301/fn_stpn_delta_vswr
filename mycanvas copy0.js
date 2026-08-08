@@ -49,18 +49,11 @@ document.addEventListener("readystatechange",()=> {
         ctx1.clearRect(0,0, canvas1.widht, canvas1.height);
         ctx1.translate(0,-360);
     //  outlined line
-        fline(ctx1, 60, 420, 350, 420);
-        fline(ctx1, 360, 420, 370, 420);
-        fline(ctx1, 380, 420, 390, 420);
-        fline(ctx1, 450, 420, 450, 575);
-        base(450,575);
-        fline(ctx1, 400, 420, 710, 420);
+        fline(ctx1, 60, 420, 710, 420);
         fline(ctx1, 60, 420, 60, 485);
         z_vert(ctx1, 60, 485);
         fline(ctx1, 60, 515, 60, 575);
         base(60, 575);
-        fline(ctx1, 135, 420, 135, 575);
-        base(135,575);
         fline(ctx1, 710, 420, 710, 450);
         z_vert(ctx1, 710, 450);
         fline(ctx1, 710, 480, 710, 515);
