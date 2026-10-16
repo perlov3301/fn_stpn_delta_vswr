@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>f1 s1_VSWR</title>
+    <title>delta_VSWR</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="styles.css" rel="stylesheet" />
     <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" 
@@ -80,7 +80,8 @@ td  input[type=number] {
 </head>
 <body>
     <div class="container">
-        <h5> Feedback welcome:perlov1001@gmail.com</h5>
+        <h6> Feedback welcome:perlov1001@gmail.com</h6>
+        <h5> VSWR and Mismatch Loss in RF transformer</h5>
         <form id="vswrForm" >
           <div class="row">
             <div class="six columns inline_inputs" >
@@ -100,7 +101,7 @@ td  input[type=number] {
             <br>
           <button 
             id="button_f_n_table"
-            class="button-primary">load the Table load
+            class="button-primary">parse the Table of load
           </button>
             <table id="mytable">
               <caption>frequency and load impedance</caption>
@@ -134,11 +135,11 @@ td  input[type=number] {
               </div>
               <div class="six columns inline_inputs">
                 <button id="table_stp" 
-                   class="button-primary">load table of steps</button>
+                   class="button-primary">parse table of steps</button>
               </div>
             </div>
             <table id="stpTable">
-              <caption>UHF Line parameters</caption>
+              <caption>rf Lines parameters</caption>
               <thead>
                 <tr >
                   <th scope="col" rowspan="2" class="vertical">section</th>
