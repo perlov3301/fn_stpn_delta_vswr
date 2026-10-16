@@ -1,82 +1,47 @@
 class table_stp_n {
-    static addRows(
-      id="stpTableBody",
-      stp_n,
-      base_rmin,
-      base_rmax,
-      base_lmin,
-      base_lmax
-    ) {
-        const tbody= document.getElementById(id);
-        let rowHTML= "";
-        for (let i=1; i<=stp_n; i++) {
-          rowHTML+=`
-            <tr>
-              <td rowspan="2">${i}</td>
-          `;
-          for (let j=1; j<=2; j++) {
-            rowHTML+=`
-              <td>${j}</td>
-              <td><input type="number" onwheel="this.blur()"
-                id="${base_rmin}${i}${j}" step="any" required> </td>
-              <td><input type="number" onwheel="this.blur()"
-                id="${base_rmax}${i}${j}" step="any" required> </td>
-              <td><input type="number" onwheel="this.blur()"
-                id="${base_lmin}${i}${j}" step="any" required> </td>
-              <td><input type="number" onwheel="this.blur()"
-                id="${base_lmax}${i}${j}" step="any" required> </td>
-            </tr>
-            `;
-          }
-        }
-        // const rowHTML= `
-        // <tr>
-        //   <td rowspan="2">1</td>
-        //   <td>1</td>
-        //   <td><input type="number" onwheel="this.blur()"
-        //     id="Rmin11" step="any" required> </td>
-        //   <td><input type="number" onwheel="this.blur()"
-        //     id="Rmax11" step="any" required> </td>
-        //   <td><input type="number" onwheel="this.blur()"
-        //     id="Lmin11" step="any" required> </td>
-        //   <td><input type="number" onwheel="this.blur()"
-        //     id="Lmax11" step="any" required> </td>
-        // </tr>
-        // <tr>
-        //   <td>2</td>
-        //   <td><input type="number" onwheel="this.blur()"
-        //     id="Rmin12" step="any" required> </td>
-        //   <td><input type="number" onwheel="this.blur()"
-        //     id="Rmax12" step="any" required> </td>
-        //   <td><input type="number" onwheel="this.blur()"
-        //     id="Lmin12" step="any" required> </td>
-        //   <td><input type="number" onwheel="this.blur()"
-        //     id="Lmax12" step="any" required> </td>
-        // </tr>
-        // <tr>
-        //   <td rowspan="2">2</td>
-        //   <td>1</td>
-        //   <td><input type="number" id="Rmin21" step="any" required> </td>
-        //   <td><input type="number" id="Rmax21" step="any" required> </td>
-        //   <td><input type="number" id="Lmin21" step="any" required> </td>
-        //   <td><input type="number" id="Lmax21" step="any" required> </td>
-        // </tr>
-        // <tr>
-        //   <td>2</td>
-        //   <td><input type="number" id="Rmin22" step="any" required> </td>
-        //   <td><input type="number" id="Rmax22" step="any" required> </td>
-        //   <td><input type="number" id="Lmin22" step="any" required> </td>
-        //   <td><input type="number" id="Lmax22" step="any" required> </td>
-        // </tr>
-        // `;
-        tbody.insertAdjacentHTML('beforeend', rowHTML);
-          return { };
+  /**
+   * Renders one block of two rows (line 1 and line 2) per stage.
+   * Input ids are <prefix><stage><line>, e.g. Rmin12 = stage 1, line 2,
+   * the same scheme as Ids.ids_stp_n().
+   * @param {string} id - tbody id
+   * @param {number} stp_n - number of stages to render
+   */
+  static addRows(
+    id="stpTableBody",
+    stp_n,
+    base_rmin="Rmin",
+    base_rmax="Rmax",
+    base_lmin="Lmin",
+    base_lmax="Lmax"
+  ) {
+      const tbody= document.getElementById(id);
+      const n= Number.isInteger(stp_n) && stp_n > 0 ? stp_n : 0;
+      const cell= (prefix, stage, line)=>
+        `<td><input type="number" onwheel="this.blur()"
+          id="${prefix}${stage}${line}" step="any" required> </td>`;
+      const line_cells= (stage, line)=>
+        cell(base_rmin, stage, line) +
+        cell(base_rmax, stage, line) +
+        cell(base_lmin, stage, line) +
+        cell(base_lmax, stage, line);
+
+      let rowHTML= "";
+      for (let stage=1; stage<=n; stage++) {
+        rowHTML+= `
+      <tr>
+        <td rowspan="2">${stage}</td>
+        <td>1</td>
+        ${line_cells(stage, 1)}
+      </tr>
+      <tr>
+        <td>2</td>
+        ${line_cells(stage, 2)}
+      </tr>`;
       }
+      tbody.insertAdjacentHTML('beforeend', rowHTML);
+      return { stages: n };
+    }
 
 }
-    
-  
-  
-  export { table_stp_n };
-  
-  
+
+export { table_stp_n };
