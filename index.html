@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>f1 s1_VSWR</title>
+    <title>ai search</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="styles.css" rel="stylesheet" />
     <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" 
@@ -117,4 +117,98 @@ td  input[type=number] {
             <label>line2 is ended by complex Impedance</label>   
             <br>
             <div class="app_diagram_wrapper">
-              <canvas id="structure1" width="800"
+              <canvas id="structure1" width="800" height="260"></canvas>
+            </div>
+            <div class="row">
+              <div class="six columns inline_inputs">
+                <label for="stp_n_input" style="font-weight:bold;">
+                    number of stages</label>
+                <input type="number" 
+                    min="1" 
+                    id="stp_n_input"
+                    step="1" required >
+              </div>
+              <div class="six columns inline_inputs">
+                <button id="table_stp" 
+                   class="button-primary">load table of stages</button>
+              </div>
+            </div>
+            <table id="stpTable">
+              <caption>stages line parameters</caption>
+              <thead>
+                <tr >
+                  <th scope="col" rowspan="2" class="vertical">stages</th>
+                  <th scope="col" rowspan="2" class="vertical">lines</th>
+                  <th scope="col" colspan="2">impedance (Ω)</th>
+                  <th scope="col" colspan="2">length (mm)</th>
+                </tr>
+                <tr>
+                  <th scope="col">min</th>
+                  <th scope="col">max</th>
+                  <th scope="col">min</th>
+                  <th scope="col">max</th>
+                </tr>
+              </thead>
+              <tbody id="stpTableBody">
+              </tbody>
+            </table>
+            <br>
+            <div class="row">
+              <div class="six columns inline_inputs">
+                <label for="search_iterations" style="font-weight:bold;">
+                    random search iterations</label>
+                <input type="number" min="1" value="100"
+                    id="search_iterations" step="1">
+              </div>
+              <div class="six columns inline_inputs">
+                <button id="button_search"
+                  style="margin-top: .1rem;"
+                  type="button" class="button-primary">random search (best VSWR)
+                </button>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="six columns inline_inputs">
+                <button class="button-primary" 
+                  style="margin-top: .1rem;"
+                  type="submit">calculate
+                </button>
+              </div>
+              <div class="six columns inline_inputs">
+                <!-- <button onclick="window.location.reload();" or -->
+                  <!-- type="reset">reset -->
+                <button onclick="console.clear(); "
+                  style="margin-top: .1rem;"
+                  type="button">clear console
+                </button>
+              </div>
+            </div>
+            
+        </form>
+        <br>
+        <fieldset>
+          <legend>results</legend>
+          <div id="result_vswr"></div>
+          <div id="statusIndicator" 
+             class="status-indicator">Ready to Input</div>
+        </fieldset>
+        
+        <br>
+        <div id="result_zin" class="inline_inputs">
+          <label for="explanation" style="font-weight: bold;">Zin or error</label>
+          <textarea id="explanation" 
+             rows="7"
+             cols="71"
+             minheight="10rem"
+             readonly></textarea>
+        </div>
+    </div>
+    <script type="module" src="parallel_vswr.js"></script>
+    <script type="module" src="timenow.js"></script>
+    <script type="module" src="calculateVSWR.js"></script>
+    <script type="module" src="parallel_zin.js"></script>
+    <script type="module" src="mycanvas.js"></script>
+
+</body>
+</html>

@@ -23,7 +23,7 @@ class inputZ { mm
         frequency= frequency*1.0e6;
         length1= length1/1000; // convert mm to m
         length2= length2/1000; // convert mm to m
-        const c = 3e8; // Speed of light (m/s)
+        const c = 299792458; // Speed of light (m/s)
         const wavelength = (c * vf) / frequency;
         const beta= (2*Math.PI*frequency)/(c*vf);//vf=1
         // ===== BRANCH 1: Short circuit (ZL = 0) =====

@@ -3,7 +3,6 @@ import { f1 } from './vswr1_db1.js'
 import { table_f_n }   from './table_f_n.js';
 import { format1 } from './format1.js';
 import { table_stp_n } from './table_stp_n.js';
-import  { mutation } from './mutation1.js';
 import { RandomSearch } from './random_search.js';
 import { Ids } from './ids_stp_n.js';
 document.addEventListener("readystatechange", () => {
